@@ -5,46 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Distributed Drawing Board (RAFT)</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="app-container">
         <header>
-            <h1>RAFT Board<span>.</span></h1>
+            <h1>Real-Time Distributed Drawing Board</h1>
             <div class="status-panel">
                 <div class="status-indicator" id="ws-status">
-                    <span class="dot"></span> Connection: Connecting
+                    <span class="dot"></span> Connection: Connecting...
                 </div>
                 <div class="status-indicator" id="leader-status">
-                    <span class="badge">LEADER: <span id="leader-id">ELECTION...</span></span>
+                    <span class="badge">Current Leader: <span id="leader-id">Unknown</span></span>
                 </div>
             </div>
         </header>
-        
+
         <main class="canvas-container">
-            <canvas id="drawing-board" width="1000" height="560"></canvas>
+            <canvas id="drawing-board" width="1000" height="600"></canvas>
             <div class="controls">
-                <div class="control-group">
-                    <button id="clear-btn">
-                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/><path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/></svg>
-                        Clear Board
-                    </button>
+                <button id="clear-btn">Clear Canvas (Local)</button>
+                <div class="color-picker">
+                    <label>Color:</label>
+                    <input type="color" id="stroke-color" value="#ffffff">
                 </div>
-                <div class="control-group">
-                    <div class="color-picker">
-                        <label>Stroke</label>
-                        <input type="color" id="stroke-color" value="#58a6ff">
-                    </div>
-                    <div class="brush-size">
-                        <label>Size</label>
-                        <input type="range" id="stroke-size" min="1" max="20" value="3">
-                    </div>
+                <div class="brush-size">
+                    <label>Size:</label>
+                    <input type="range" id="stroke-size" min="1" max="20" value="3">
                 </div>
             </div>
         </main>
-        
+
         <footer>
-            <p>Distributed Consensus Cluster &bull; <span>3 Nodes</span> &bull; RAFT-Lite v1.0</p>
+            <p>Powered by Mini-RAFT Consensus &bull; Zero-Downtime Deployment</p>
         </footer>
     </div>
     <script src="app.js"></script>

@@ -1,8 +1,10 @@
 const express = require('express');
 const axios = require('axios');
+const cors = require('cors');
 const RAFTNode = require('./raft');
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 
 const REPLICA_ID = process.env.REPLICA_ID || `replica-${Math.floor(Math.random()*1000)}`;
@@ -57,6 +59,10 @@ app.post('/stroke', async (req, res) => {
 
 app.get('/health', (req, res) => {
     res.status(200).json({ status: "alive", id: REPLICA_ID, state: raft.state });
+});
+
+app.get('/logs', (req, res) => {
+    res.json(raft.events);
 });
 
 // Server must be declared BEFORE signal handlers that reference it
